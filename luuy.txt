@@ -1,0 +1,1 @@
+capnhatDataBase:  Scaffold-DbContext "Server=ADMIN;Database=DbShopLaptop;;User=sa;Password=sa" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Force
