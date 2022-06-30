@@ -1,0 +1,69 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<WebLaptop.Models.Page>
+
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách Page" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="col-xs-12">
+    <div class="box-content">
+        <h4 class="box-title">Danh sách page</h4>
+        <div class="dropdown js__drop_down">
+            <a class="btn btn-info btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminPages" asp-action="Create">Add Page</a>
+            <!-- /.sub-menu -->
+        </div>
+        <table class="table table-condensed">
+            <caption>Danh sách Page: page @ViewBag.CurrentPage</caption>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Page Name</th>
+                    <th>Trạng thái</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.PageName</td>
+                            <td>
+                                @if (item.Published == true)
+                                {
+                                    <span class="notice notice-blue">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="notice notice-danger">Block</span>
+                                }
+                            </td>
+
+                            <td>
+                                <a class="btn btn-info btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminPages" asp-action="Details" asp-route-id="@item.Id">View</a>
+                                <a class="btn btn-primary btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminPages" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a class="btn btn-success btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminPages" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="dataTables_info" id="example_info" role="status" aria-live="polite">Page @CurrentPage</div>
+            </div>
+            <div class="col-sm-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                    <ul class="pagination">
+                        <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminPages" asp-action="Index"></pager>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.box-content -->
+</div>

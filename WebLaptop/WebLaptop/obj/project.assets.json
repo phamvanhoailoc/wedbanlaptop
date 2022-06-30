@@ -7376,11 +7376,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Hoc Tap\\wedLaptop\\WebLaptop\\WebLaptop\\WebLaptop.csproj",
+      "projectUniqueName": "E:\\Hoc Tap\\wedLaptop\\wedbanlaptop\\WebLaptop\\WebLaptop\\WebLaptop.csproj",
       "projectName": "WebLaptop",
-      "projectPath": "E:\\Hoc Tap\\wedLaptop\\WebLaptop\\WebLaptop\\WebLaptop.csproj",
+      "projectPath": "E:\\Hoc Tap\\wedLaptop\\wedbanlaptop\\WebLaptop\\WebLaptop\\WebLaptop.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "E:\\Hoc Tap\\wedLaptop\\WebLaptop\\WebLaptop\\obj\\",
+      "outputPath": "E:\\Hoc Tap\\wedLaptop\\wedbanlaptop\\WebLaptop\\WebLaptop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

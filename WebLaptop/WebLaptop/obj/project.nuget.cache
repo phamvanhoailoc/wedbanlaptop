@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BhRzk2XwUCxWJc2+80cGfvB/2LSidss5nZBG35kTpJeIhBllHqbuGDI5jbuljCL/u8J+ecnbStue21g6s3XABA==",
+  "dgSpecHash": "klUjMU6Lb+5Dw5kR/s2IB5JsLA88563ZdFNBVarYMILiMyVfH41heLf/iYOy/afGCtc0Iyd4X2NBsdJjzmba3g==",
   "success": true,
-  "projectFilePath": "E:\\Hoc Tap\\wedLaptop\\WebLaptop\\WebLaptop\\WebLaptop.csproj",
+  "projectFilePath": "E:\\Hoc Tap\\wedLaptop\\wedbanlaptop\\WebLaptop\\WebLaptop\\WebLaptop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
