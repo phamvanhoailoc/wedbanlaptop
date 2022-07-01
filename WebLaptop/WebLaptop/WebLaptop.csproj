@@ -24,6 +24,9 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\images\category\" />
+    <Folder Include="wwwroot\images\tintuc\" />
+    <Folder Include="wwwroot\images\pages\" />
   </ItemGroup>
 
   <ItemGroup>

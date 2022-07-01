@@ -950,3 +950,9 @@ E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Are
 E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminTintucs\Details.cshtml.g.cs
 E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminTintucs\Edit.cshtml.g.cs
 E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminTintucs\Index.cshtml.g.cs
+E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\Search\ListProductSearchPartialView.cshtml.g.cs
+E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Create.cshtml.g.cs
+E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Delete.cshtml.g.cs
+E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Details.cshtml.g.cs
+E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Edit.cshtml.g.cs
+E:\Hoc Tap\wedLaptop\wedbanlaptop\WebLaptop\WebLaptop\obj\Debug\net5.0\Razor\Areas\Admin\Views\AdminCategories\Index.cshtml.g.cs

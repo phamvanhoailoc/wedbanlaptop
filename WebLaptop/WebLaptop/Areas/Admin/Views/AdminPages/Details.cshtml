@@ -5,75 +5,38 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Page</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PageName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PageName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Contents)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Contents)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Thumb)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Thumb)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Published)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Published)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MetaDesc)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MetaDesc)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MetaKey)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MetaKey)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Alias)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Alias)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Ordering)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Ordering)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<h4>Thông tin Page</h4>
+<table class="table table-hover no-margin">
+    <tbody>
+        <tr>
+            <td>ID: </td>
+            <td>@Model.Id</td>
+        </tr>
+        <tr>
+            <td>Tên Page </td>
+            <td>@Model.PageName</i></td>
+        </tr>
+        <tr>
+            <td>Ảnh</td>
+            <td>
+                <img width="200" height="200" src="~/images/pages/@Model.Thumb" alt="@Model.Title" />
+            </td>
+        </tr>
+        <tr>
+            <td>MetaDesc: </td>
+            <td>@Model.MetaDesc</td>
+        </tr>
+        <tr>
+            <td>Ngày tạo: </td>
+            <td>@Model.CreatedAt</td>
+        </tr>        
+        <tr>
+            <td>MetaKey: </td>
+            <td>@Model.MetaKey</td>
+        </tr>
+        <tr>
+            <td>Nội dung: </td>
+            <td>@Model.Contents</td>
+        </tr>
+    </tbody>
+</table>

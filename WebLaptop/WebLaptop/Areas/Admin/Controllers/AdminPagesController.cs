@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using DiChoSaiGon.Helpper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +17,11 @@ namespace WebLaptop.Areas.Admin.Controllers
     public class AdminPagesController : Controller
     {
         private readonly DbShopLaptopContext _context;
-
-        public AdminPagesController(DbShopLaptopContext context)
+        public INotyfService _notyfService { get; }
+        public AdminPagesController(DbShopLaptopContext context, INotyfService notyfService)
         {
             _context = context;
+            _notyfService = notyfService;
         }
 
         // GET: Admin/AdminPages
@@ -62,12 +66,22 @@ namespace WebLaptop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PageName,Contents,Thumb,Published,Title,MetaDesc,MetaKey,Alias,CreatedAt,Ordering")] Page page)
+        public async Task<IActionResult> Create([Bind("Id,PageName,Contents,Thumb,Published,Title,MetaDesc,MetaKey,Alias,CreatedAt,Ordering")] Page page, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (ModelState.IsValid)
             {
+                if (fThumb != null)
+                {
+                    string extension = Path.GetExtension(fThumb.FileName);
+                    string imageName = Utilities.SEOUrl(page.PageName) + extension;
+                    page.Thumb = await Utilities.UploadFile(fThumb, @"pages", imageName.ToLower());
+                }
+                if (string.IsNullOrEmpty(page.Thumb)) page.Thumb = "default.jpg";
+                page.CreatedAt = DateTime.Now;
                 _context.Add(page);
+                
                 await _context.SaveChangesAsync();
+                _notyfService.Success("Create thành công");
                 return RedirectToAction(nameof(Index));
             }
             return View(page);
@@ -94,7 +108,7 @@ namespace WebLaptop.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PageName,Contents,Thumb,Published,Title,MetaDesc,MetaKey,Alias,CreatedAt,Ordering")] Page page)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PageName,Contents,Thumb,Published,Title,MetaDesc,MetaKey,Alias,CreatedAt,Ordering")] Page page, Microsoft.AspNetCore.Http.IFormFile fThumb)
         {
             if (id != page.Id)
             {
@@ -105,7 +119,16 @@ namespace WebLaptop.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (fThumb != null)
+                    {
+                        string extension = Path.GetExtension(fThumb.FileName);
+                        string imageName = Utilities.SEOUrl(page.Title) + extension;
+                        page.Thumb = await Utilities.UploadFile(fThumb, @"pages", imageName.ToLower());
+                    }
+                    if (string.IsNullOrEmpty(page.Thumb)) page.Thumb = "default.jpg";
+                    page.CreatedAt = DateTime.Now;
                     _context.Update(page);
+                    _notyfService.Success("Edit thành công");
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -149,6 +172,7 @@ namespace WebLaptop.Areas.Admin.Controllers
         {
             var page = await _context.Pages.FindAsync(id);
             _context.Pages.Remove(page);
+            _notyfService.Success("Xóa thành công");
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

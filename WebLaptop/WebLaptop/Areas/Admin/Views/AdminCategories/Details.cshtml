@@ -1,0 +1,39 @@
+﻿@model WebLaptop.Models.Category
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h4>Thông tin danh mục</h4>
+<table class="table table-hover no-margin">
+    <tbody>
+        <tr>
+            <td>ID: </td>
+            <td>@Model.CatId</td>
+        </tr>
+        <tr>
+            <td>Tên danh mục </td>
+            <td>@Model.CastName</i></td>
+        </tr>
+        <tr>
+            <td>Ảnh</td>
+            <td>
+                <img width="200" height="200" src="~/images/category/@Model.Thumb" alt="@Model.Title" />
+            </td>
+        </tr>
+        <tr>
+            <td>MetaDesc: </td>
+            <td>@Model.MetaDesc</td>
+        </tr>
+        
+        <tr>
+            <td>MetaKey: </td>
+            <td>@Model.MetaKey</td>
+        </tr>
+        <tr>
+            <td>Nội dung: </td>
+            <td>@Model.Descriiption</td>
+        </tr>
+    </tbody>
+</table>

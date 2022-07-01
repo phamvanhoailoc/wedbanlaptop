@@ -5,75 +5,98 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Edit</h2>
+@section Styles{
+    <link href="~/Adminassets/sumernote/summernote-bs4.css" rel="stylesheet" />
+    <link href="~/Adminassets/sumernote/summernote.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+}
 
-<h4>Page</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="PageName" class="control-label"></label>
-                <input asp-for="PageName" class="form-control" />
-                <span asp-validation-for="PageName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Contents" class="control-label"></label>
-                <input asp-for="Contents" class="form-control" />
-                <span asp-validation-for="Contents" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Thumb" class="control-label"></label>
-                <input asp-for="Thumb" class="form-control" />
-                <span asp-validation-for="Thumb" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Published" /> @Html.DisplayNameFor(model => model.Published)
-                    </label>
+<div class="col-xs-12">
+    <div class="box-content">
+        <h4 class="box-title">Wizard With Form Validation</h4>
+        <!-- /.box-title -->
+        <!-- /.dropdown js__dropdown -->
+        <form asp-controller="AdminPages" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div id="tabsleft" class="tabbable tabs-left">
+                <ul>
+                    <li><a href="#tabsleft-tab1" data-toggle="tab">First</a></li>
+                    <li><a href="#tabsleft-tab2" data-toggle="tab">Second</a></li>
+                    <li><a href="#tabsleft-tab3" data-toggle="tab">Third</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane" id="tabsleft-tab1">
+                        <div class="form-group">
+                            <label for="emailfield">Tên Page</label>
+                            <div class="controls">
+                                <input type="text" asp-for="PageName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Ảnh</label>
+                            <input type="file" name="fThumb" asp-for="Thumb">
+                            <span asp-validation-for="Thumb" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="switch primary">
+                                <input type="checkbox" asp-for="Published">
+                                <label for="Published">Public</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane" id="tabsleft-tab2">
+                        <div class="form-group">
+                            <label for="emailfield">Tiêu đề</label>
+                            <div class="controls">
+                                <input type="text" asp-for="Title" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailfield">MetaDesc</label>
+                            <div class="controls">
+                                <input type="text" asp-for="MetaDesc" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailfield">MetaKey</label>
+                            <div class="controls">
+                                <input type="text" asp-for="MetaKey" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tabsleft-tab3">
+                        <div class="card">
+                            <div class="card-body">
+                                <textarea class="summernote" asp-for="Contents"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MetaDesc" class="control-label"></label>
-                <input asp-for="MetaDesc" class="form-control" />
-                <span asp-validation-for="MetaDesc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MetaKey" class="control-label"></label>
-                <input asp-for="MetaKey" class="form-control" />
-                <span asp-validation-for="MetaKey" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Alias" class="control-label"></label>
-                <input asp-for="Alias" class="form-control" />
-                <span asp-validation-for="Alias" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ordering" class="control-label"></label>
-                <input asp-for="Ordering" class="form-control" />
-                <span asp-validation-for="Ordering" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>
+    <!-- /.box-content -->
 </div>
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="~/Adminassets/sumernote/summernote-bs4.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            $('.summernote').summernote({
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
+                styleTags: ['p', 'h1', 'h2', 'h3', 'h4', 'h5'],
+                height: 200,
+                minHeight: null,
+                maxHeight: null,
+                focus: true
+            });
+        });
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    </script>
+}
 
