@@ -1,0 +1,68 @@
+﻿@model List<WebLaptop.ModelViews.CartItem>
+@if (Model != null && Model.Count() > 0)
+{
+<div class="cart__close"><button type="button" class="cart__close-btn"><i class="fal fa-times"></i></button></div>
+                <ul>
+                    <li>
+                        <div class="cart__title">
+                            <h4>Giỏ hàng</h4>
+                            <span>(1 Item in Cart)</span>
+                        </div>
+                    </li>
+                    @foreach (var item in Model)
+                    {
+                        string url = $"/{item.product.Alias}-{item.product.Id}.html";
+    <li>
+        <div class="cart__item d-flex justify-content-between align-items-center">
+            <div class="cart__inner d-flex">
+                <div class="cart__thumb">
+                    <a href="@url">
+                        <img src="~/images/products/@item.product.Thumb" alt="@item.product.Title">
+                    </a>
+                </div>
+                <div class="cart__details">
+                    <h6><a href="@url"> @item.product.ProducName  </a></h6>
+                    <div class="cart__price">
+                        <span>@item.product.Price.Value.ToString("#,##0") VNĐ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="cart__del">
+                <a href="#"><i class="fal fa-trash-alt"></i></a>
+            </div>
+        </div>
+    </li>}
+
+                    <li>
+                        <div class="cart__sub d-flex justify-content-between align-items-center">
+                            <h6>Tổng tiền</h6>
+                            <span class="cart__sub-total">@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</span>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="checkout.html" class="t-y-btn w-100 mb-10">Thanh toán</a>
+                        <a href="cart.html" class="t-y-btn t-y-btn-border w-100 mb-10">Xem giỏ hàng</a>
+                    </li>
+                </ul> }
+                            else
+                            {
+                <div class="cart__close"><button type="button" class="cart__close-btn"><i class="fal fa-times"></i></button></div>
+                                <ul>
+                                    <li>
+                                        <div class="cart__title">
+                                            <h4>Giỏ hàng rỗng</h4>
+                                            
+                                        </div>
+                                   
+                                        <div class="cart__sub d-flex justify-content-between align-items-center">
+                                            <h6>Tổng tiền</h6>
+                                            <span class="cart__sub-total">0 VNĐ</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="checkout.html" class="t-y-btn w-100 mb-10">Thanh toán</a>
+                                        <a href="cart.html" class="t-y-btn t-y-btn-border w-100 mb-10">Xem giỏ hàng</a>
+                                    </li>
+                                </ul>}
+
+

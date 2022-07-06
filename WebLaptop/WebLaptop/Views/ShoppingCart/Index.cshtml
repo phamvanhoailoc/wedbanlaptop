@@ -1,0 +1,159 @@
+﻿@model List<WebLaptop.ModelViews.CartItem>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+
+    <!-- breadcrumb area start -->
+    <section class="breadcrumb__area box-plr-75">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__wrapper">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Giỏ hàng</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb area end -->
+    <!-- Cart Area Strat-->
+    <section class="cart-area pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                    <form action="#">
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">Ảnh </th>
+                                        <th class="cart-product-name">Sản phẩm</th>
+                                        <th class="product-price">Đơn giá</th>
+                                        <th class="product-quantity">Số lượng</th>
+                                        <th class="product-subtotal">Thành tiền</th>
+                                        <th class="product-remove">Xóa</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Count() > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            string url = $"/{item.product.Alias}-{item.product.Id}.html";
+                                            <tr>
+                                                <td class="product-thumbnail"><a href="@url"><img src="~/images/products/@item.product.Thumb" alt="@item.product.Title"></a></td>
+                                                <td class="product-name"><a href="@url">@item.product.ProducName</a></td>
+                                                <td class="product-price"><span class="amount">@item.product.Price.Value.ToString("#,##0") VNĐ</span></td>
+                                                <td class="product-quantity">
+                                                    <div class="cart-plus-minus p-relative"><input data-mahh="@item.product.Id" class="cartItem" type="number" value="@item.amount"><div class=" dec qtybutton">-</div><div class="  inc qtybutton">+</div></div>
+                                                </td>
+                                                <td class="product-subtotal"><span id="amount">@item.TotalMoney.ToString("#,##0") VNĐ</span></td>
+                                                <td class="product-remove t"><button><i  data-mahh="@item.product.Id" class="removecart fa fa-times"></i></button></td>
+                                             
+                                            </tr>
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="login-action mb-20 fix">
+                            <h2>Tổng đơn hàng</h2>
+                            <ul>
+                                <li>Thành tiền: <h4>@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</h4></li>
+                            </ul>
+                        </div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+
+                            <a href="/checkout.html" class="t-y-btn ">Đặt hàng</a>
+                        }
+                        else
+                        {
+                    <a href="/dang-nhap.html?returnUrl=/checkout.html" class="t-y-btn ">Đặt hàng</a>
+
+                        }
+
+                    </form>
+                    }
+                    else
+                    {
+                        <p>Chưa có hàng hóa trong giỏ hàng</p>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Cart Area End-->
+
+</main>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                function loadHeaderCart() {
+                    $("#HeaderCart").load("/AjaxContent/HeaderCart");
+                    $("#NumberCart").load("/AjaxContent/NumberCart");
+                }
+                $(".cartItem").click(function () {
+                    var productid = $(this).attr("data-mahh");
+                    var soLuong = parseInt($(this).val());
+                    $.ajax({
+                        url: '/api/cart/update',
+                        type: "POST",
+                        datatype: "JSON",
+                        data: {
+                            productID: productid,
+                            amount: soLuong
+                        },
+                        success: function (result) {
+                            if (result.success) {
+                                loadHeaderCart();
+                                window.location = 'cart.html';
+                            }                            
+                        },
+                        error: function (rs) {
+                            alert("cap nhat cart erro !");
+                        }
+                    });
+                });
+                $(".removecart").click(function () {
+                    var productid = $(this).attr("data-mahh");                  
+                    $.ajax({
+                        url: '/api/cart/remove',
+                        type: "POST",
+                        datatype: "JSON",
+                        data: {
+                            productID: productid,                         
+                        },
+                        success: function (result) {
+                            if (result.success) {
+                                loadHeaderCart();
+                                window.location = 'cart.html';
+                            }
+                        },
+                        error: function (rs) {
+                            alert("cap nhat cart erro !");
+                        }
+                    });
+                });
+            });
+        });      
+              
+    </script>
+}

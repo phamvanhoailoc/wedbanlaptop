@@ -1,0 +1,71 @@
+﻿@model WebLaptop.ModelViews.XemDonHang
+
+@if (Model != null)
+{
+<main>
+    <!-- breadcrumb area start -->
+    <section class="breadcrumb__area box-plr-75">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__wrapper">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Your Cart</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h2>Thông tin đơn hàng @Model.DonHang.Id</h2>
+    <p>Ngày đặt hàng: @Model.DonHang.OrderDate</p>
+    <p>Trạng thái: @Model.DonHang.TransacStatus.Status</p>
+    <p>Tổng tiền: @Model.DonHang.TotalMoney.Value.ToString("#,##0") VNĐ</p>
+
+
+    <!-- breadcrumb area end -->
+    <!-- Cart Area Strat-->
+    <section class="cart-area pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="#">
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">Mã sản phẩm</th>
+                                        <th class="cart-product-name">Tên sản phẩm</th>
+                                        <th class="cart-product-name">Số lượng</th>
+                                        <th class="product-quantity">Đơn giá</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ChiTietDonHang)
+                                    {
+                                        
+                                        <tr>
+                                            <td class="product-thumbnail"><span>@item.Product.Id</span></td>
+                                            <td class="product-name"><span>@item.Product.ProducName</span></td>
+                                            <td class="product-name"><span>@item.Amount</span></td>
+                                            <td class="product-subtotal"><span>@item.Product.Price.Value.ToString("#,##0") VNĐ</span></td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Cart Area End-->
+
+</main>
+}

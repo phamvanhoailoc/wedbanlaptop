@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,15 +24,27 @@ namespace WebLaptop.Areas.Admin.Controllers
         // GET: Admin/AdminKhachhangs
         public IActionResult Index(int? page)
         {
-            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-            var pageSize = 20;
-            var IsCustomers = _context.Khachhangs
-                .AsNoTracking()
-                .Include(x=>x.Location)
-                .OrderByDescending(x => x.CreateDate);
-            PagedList<Khachhang> models = new PagedList<Khachhang>(IsCustomers, pageNumber, pageSize);
-            ViewBag.CurrentPage = pageNumber;
-            return View(models);
+
+            var taikhoanID = HttpContext.Session.GetString("Id");
+            if (taikhoanID != null)
+            {
+                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                var pageSize = 20;
+                var IsCustomers = _context.Khachhangs
+                    .AsNoTracking()
+                    .Include(x => x.Location)
+                    .OrderByDescending(x => x.CreateDate);
+                PagedList<Khachhang> models = new PagedList<Khachhang>(IsCustomers, pageNumber, pageSize);
+                ViewBag.CurrentPage = pageNumber;
+                return View(models);
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "AdminTaiKhoans");
+            }
+
+            
         }
 
         // GET: Admin/AdminKhachhangs/Details/5
@@ -55,7 +68,16 @@ namespace WebLaptop.Areas.Admin.Controllers
         // GET: Admin/AdminKhachhangs/Create
         public IActionResult Create()
         {
-            return View();
+            var taikhoanID = HttpContext.Session.GetString("Id");
+            if (taikhoanID != null)
+            {
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "AdminTaiKhoans");
+            }
         }
 
         // POST: Admin/AdminKhachhangs/Create

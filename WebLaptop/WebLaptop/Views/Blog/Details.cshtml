@@ -1,0 +1,126 @@
+﻿@model WebLaptop.Models.Tintuc
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Tintuc> IsBestSell = ViewBag.BestSell;
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <section class="breadcrumb__area box-plr-75">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__wrapper">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Blog Details</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb area end -->
+    <!-- blog area start -->
+    <section class="blog__area box-plr-75 pb-70">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xxl-2 col-xl-3 col-lg-4">
+                    <div class="sidebar__widget">                  
+                        <div class="sidebar__widget-item mb-35">
+                            <h3 class="sidebar__widget-title mb-30">Bài viết mới</h3>
+                            <div class="sidebar__post rc__post">
+                                <ul>
+                                    @if (IsBestSell != null)
+                                    {
+                                        foreach (var item in IsBestSell)
+                                        {
+                                            string url = $"/tin-tuc/{item.Alias}-{item.Id}.html";
+                                            <li>
+                                                <div class="rc__post d-flex align-items-center">
+                                                    <div class="rc__post-thumb mr-20">
+                                                        <a href="blog-details.html">
+                                                            <img src="~/images/tintuc/@item.Thumb" alt="@item.Title">
+                                                        </a>
+                                                    </div>
+                                                    <div class="rc__post-content">
+                                                        <h3 class="rc__post-title">
+                                                            <a href="@url">@item.Title</a>
+                                                        </h3>
+                                                        <div class="rc__meta">
+                                                            <span>@item.CreateDate</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="col-xxl-10 col-xl-9 col-lg-8 order-first order-lg-last">
+                    <div class="row">
+                        <div class="col-xxl-12">
+                            <div class="postbox__wrapper">
+                                <article class="postbox__item format-image mb-50 transition-3">
+                                    <div class="postbox__thumb w-img">
+                                        <a href="blog-details.html">
+                                            <img src="~/images/tintuc/@Model.Thumb" alt="@Model.Title">
+                                        </a>
+                                    </div>
+                                    <div class="postbox__content">
+                                        <h3 class="postbox__title postbox__title-2">
+                                            <a href="#">@Model.Title</a>
+                                        </h3>
+                                        <div class="postbox__meta">
+                                            <p>Post Date: <span>@Model.CreateDate </span></p>
+                                        </div>
+                                        <div class="postbox__text">
+                                            <p>@Html.Raw(Model.Contact)</p>
+                                        </div>
+                                        
+                                    </div>
+                                </article>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blog area end -->
+    <!-- brand area start -->
+    <section class="brand__area">
+        <div class="container custom-container">
+            <div class="row align-items-center">
+                <div class="col-xl-12">
+                    <div class="brand__slider owl-carousel">
+                        <div class="brand__item">
+                            <img src="assets/img/brand/brand-1.jpg" alt="">
+                        </div>
+                        <div class="brand__item">
+                            <img src="assets/img/brand/brand-2.jpg" alt="">
+                        </div>
+                        <div class="brand__item">
+                            <img src="assets/img/brand/brand-3.jpg" alt="">
+                        </div>
+                        <div class="brand__item">
+                            <img src="assets/img/brand/brand-4.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- brand area end -->
+
+</main>

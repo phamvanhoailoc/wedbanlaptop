@@ -1,0 +1,87 @@
+﻿@model WebLaptop.Models.Order
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<ChitietOrder> ChitietOrder = ViewBag.chitiet;
+}
+<div class="row small-spacing">
+    <div class="col-xs-12">
+        <div class="invoice-box">
+            <table>
+                <tr class="top">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                                <td class="title">
+                                    <a href="#" class="logo">Ninja<span>Admin</span></a>
+                                </td>
+                               
+                                <td>
+                                    ID #: @Model.Id<br>
+                                    Ngày tạo: @Model.OrderDate<br>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr class="information">
+                    <td colspan="2">
+                        <table>
+                            <tr>
+                             
+                                <td>
+                                    @Model.Address
+                                </td>
+                                
+                                <td>
+                                    @Model.Khachhang.FullName<br>
+                                    @Model.Khachhang.Email<br>
+                                    @Model.Khachhang.Sdt
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="heading">
+                    <td>
+                        Sản phẩm
+                    </td>
+                    
+                    <td>
+                        Đơn giá
+                    </td>
+                </tr>
+                @if (ChitietOrder != null && ChitietOrder.Count() > 0)
+                {
+                    foreach (var item in ChitietOrder)
+                    {
+            <tr class="item">
+                <td >
+                    @item.Product.ProducName
+                </td>
+                
+
+                <td>
+                    @item.Product.Price.Value.ToString("#,###") VNĐ
+                </td>
+            </tr>
+                    }
+                }
+
+            <tr class="total">
+                <td></td>
+               
+                <td>
+                    Tổng tiền: @Model.TotalMoney.Value.ToString("#,###") VND
+                </td>
+            </tr>
+            </table>
+           
+        </div>
+        <!-- /.invoice-box -->
+    </div>
+    <!-- /.col-xs-12 -->
+</div>

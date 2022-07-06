@@ -22,6 +22,8 @@ namespace WebLaptop.Models
         public DateTime? PaymentDate { get; set; }
         public int? PaymentId { get; set; }
         public string Note { get; set; }
+        public int? TotalMoney { get; set; }
+        public string Address { get; set; }
 
         public virtual Khachhang Khachhang { get; set; }
         public virtual TransacStatus TransacStatus { get; set; }

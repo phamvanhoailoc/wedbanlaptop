@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using DiChoSaiGon.Helpper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -28,30 +29,41 @@ namespace WebLaptop.Areas.Admin.Controllers
         // GET: Admin/AdminProducts
         public IActionResult Index(int page = 1, int CatID = 0)
         {
-            var pageNumber = page;
-            var pageSize = 20;
-            List<Product> IsProducts = new List<Product>();
-            if (CatID != 0)
+
+            var taikhoanID = HttpContext.Session.GetString("Id");
+            if (taikhoanID != null)
             {
-                IsProducts = _context.Products
-                    .AsNoTracking()
-                    .Where(x => x.CatId == CatID)
-                    .Include(x => x.Cat)
-                    .OrderByDescending(x => x.Id).ToList();
+                var pageNumber = page;
+                var pageSize = 8;
+                List<Product> IsProducts = new List<Product>();
+                if (CatID != 0)
+                {
+                    IsProducts = _context.Products
+                        .AsNoTracking()
+                        .Where(x => x.CatId == CatID)
+                        .Include(x => x.Cat)
+                        .OrderByDescending(x => x.Id).ToList();
+                }
+                else
+                {
+                    IsProducts = _context.Products
+                        .AsNoTracking()
+                        .Include(x => x.Cat)
+                        .OrderByDescending(x => x.Id).ToList();
+                }
+
+                PagedList<Product> models = new PagedList<Product>(IsProducts.AsQueryable(), pageNumber, pageSize);
+                ViewBag.CurrentCateID = CatID;
+                ViewBag.CurrentPage = pageNumber;
+                ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CastName", CatID);
+                return View(models);
+
             }
             else
             {
-                IsProducts = _context.Products
-                    .AsNoTracking()
-                    .Include(x => x.Cat)
-                    .OrderByDescending(x => x.Id).ToList();
+                return RedirectToAction("Login", "AdminTaiKhoans");
             }
-            
-            PagedList<Product> models = new PagedList<Product>(IsProducts.AsQueryable(), pageNumber, pageSize);
-            ViewBag.CurrentCateID = CatID;
-            ViewBag.CurrentPage = pageNumber;
-            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CastName", CatID);
-            return View(models);
+           
         }
         public IActionResult Filtter(int CatID = 0)
         {
@@ -85,8 +97,19 @@ namespace WebLaptop.Areas.Admin.Controllers
         // GET: Admin/AdminProducts/Create
         public IActionResult Create()
         {
-            ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CastName");
-            return View();
+            var taikhoanID = HttpContext.Session.GetString("Id");
+            if (taikhoanID != null)
+            {
+                ViewData["DanhMuc"] = new SelectList(_context.Categories, "CatId", "CastName");
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "AdminTaiKhoans");
+            }
+
+           
         }
 
         // POST: Admin/AdminProducts/Create
@@ -153,7 +176,7 @@ namespace WebLaptop.Areas.Admin.Controllers
                 {
                     product.ProducName = Utilities.ToTitleCase(product.ProducName);
                     if (fThumb != null)
-                    {
+                    {  
                         string extension = Path.GetExtension(fThumb.FileName);
                         string image = Utilities.SEOUrl(product.ProducName) + extension;
                         product.Thumb = await Utilities.UploadFile(fThumb, @"products", image.ToLower());

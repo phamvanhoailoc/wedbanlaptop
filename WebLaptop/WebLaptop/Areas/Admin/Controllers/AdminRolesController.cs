@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,18 @@ namespace WebLaptop.Areas.Admin.Controllers
         // GET: Admin/AdminRoles
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Roles.ToListAsync());
+
+            var taikhoanID = HttpContext.Session.GetString("Id");
+            if (taikhoanID != null)
+            {
+                return View(await _context.Roles.ToListAsync());
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "AdminTaiKhoans");
+            }
+           
         }
 
         // GET: Admin/AdminRoles/Details/5
@@ -49,7 +61,16 @@ namespace WebLaptop.Areas.Admin.Controllers
         // GET: Admin/AdminRoles/Create
         public IActionResult Create()
         {
-            return View();
+            var taikhoanID = HttpContext.Session.GetString("Id");
+            if (taikhoanID != null)
+            {
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "AdminTaiKhoans");
+            }
         }
 
         // POST: Admin/AdminRoles/Create

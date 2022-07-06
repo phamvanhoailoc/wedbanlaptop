@@ -1,0 +1,63 @@
+﻿@model WebLaptop.Models.Khachhang
+
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+}
+
+<section class="contact__area box-plr-90 pt-55 pb-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xxl-4 col-xl-4 col-lg-5">
+                <div class="contact__info">
+
+
+                    <div class="contact__hotline d-flex align-items-center mb-35">
+
+                        <div class="contact__hotline-info">
+                            <h3>Chào @Model.FullName</h3>
+                            <span><a href="/doi-mat-khau.html">Đổi mật khẩu</a></span>
+                        </div>
+                    </div>
+                    <div class="contact__address mb-20">
+                        <ul>
+
+                            <li>
+                                <p><span>Họ và tên: </span>@Model.FullName  </p>
+                            </li>
+                            <li>
+                                <p><span>Email: </span>@Model.Email </p>
+                            </li>
+                            <li>
+                                <p><span>Số điện thoại: </span>@Model.Sdt </p>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="contact__social">
+                        <span>Social Share:</span>
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fal fa-basketball-ball"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-8 col-xl-8 col-lg-7">
+              
+            </div>
+        </div>
+        
+    </div>
+</section>

@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WebLaptop.ModelViews;
+using WebLaptop.Areas.Admin.ModelViews;
 
 #nullable disable
 
@@ -106,6 +108,8 @@ namespace WebLaptop.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.CreateDate).HasColumnType("datetime");
+
                 entity.Property(e => e.OrderId).HasColumnName("orderID");
 
                 entity.Property(e => e.ProductId).HasColumnName("productID");
@@ -192,6 +196,8 @@ namespace WebLaptop.Models
                 entity.ToTable("Order");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Address).HasMaxLength(200);
 
                 entity.Property(e => e.KhachhangId).HasColumnName("khachhangID");
 
@@ -407,5 +413,11 @@ namespace WebLaptop.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<WebLaptop.ModelViews.MuaHangVM> MuaHangVM { get; set; }
+
+        public DbSet<WebLaptop.ModelViews.MuaHangSuccessVM> MuaHangSuccessVM { get; set; }
+
+        public DbSet<WebLaptop.Areas.Admin.ModelViews.RegisterAdminVM> RegisterAdminVM { get; set; }
     }
 }

@@ -1,0 +1,19 @@
+﻿@model List<WebLaptop.ModelViews.CartItem>
+@if (Model != null && Model.Count() > 0)
+{
+<a href="javascript:void(0);" class="cart__toggle">
+    <span class="cart__total-item" id="NumberCart" >@Model.Count()</span>
+</a>
+                <span class="cart__content">
+                    <span class="cart__my">My Cart:</span>
+                    <span class="cart__total-price">@Model.Sum(x => x.TotalMoney).ToString("#,##0") VNĐ</span>
+                </span> }
+                            else
+                            {
+                <a href="#" class="cart__toggle">
+                    <span class="cart__total-item">0</span>
+                </a>
+                                <span class="cart__content">
+                                    <span class="cart__my">My Cart:</span>
+                                    <span class="cart__total-price">0 VNĐ</span>
+                                </span>}

@@ -1,0 +1,55 @@
+﻿@model WebLaptop.ModelViews.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+
+    <!-- breadcrumb area start -->
+    <section class="breadcrumb__area box-plr-75">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__wrapper">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Register</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb area end -->
+    <!-- login Area Strat-->
+    <section class="login-area pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="basic-login">
+                        <h3 class="text-center mb-60">Đăng nhập</h3>
+                        <form asp-action="Login" >                            
+                            <label for="email-id">Địa chỉ Email  <span>**</span></label>
+                            <input asp-for="UserName" type="email" placeholder="Email address..." />
+                            <span asp-validation-for="UserName" class="text-danger"></span>                           
+                            <label for="pass">Mật khẩu <span>**</span></label>
+                            <input asp-for="Password" type="password" placeholder="Enter password..." />
+                            <span asp-validation-for="Password" class="text-danger"></span>                          
+                            <div class="mt-10"></div>
+                            <button class="t-y-btn w-100">Đăng nhập ngay</button>
+                            <div class="or-divide"><span>Hoặc</span></div>
+                            <a href="/dang-ky.html" class="t-y-btn t-y-btn-grey w-100">Đăng ký ngay</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- login Area End-->
+
+</main>
+

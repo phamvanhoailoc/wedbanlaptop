@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using DiChoSaiGon.Helpper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -28,14 +29,25 @@ namespace WebLaptop.Areas.Admin.Controllers
         // GET: Admin/AdminTintucs
         public IActionResult Index(int? page)
         {
-            var pageNumber = page == null || page <= 0 ? 1 : page.Value;
-            var pageSize = 20;
-            var Istintucs = _context.Tintucs
-                .AsNoTracking()
-                .OrderByDescending(x => x.Id);
-            PagedList<Tintuc> models = new PagedList<Tintuc>(Istintucs, pageNumber, pageSize);
-            ViewBag.CurrentPage = pageNumber;
-            return View(models);
+
+            var taikhoanID = HttpContext.Session.GetString("Id");
+            if (taikhoanID != null)
+            {
+                var pageNumber = page == null || page <= 0 ? 1 : page.Value;
+                var pageSize = 20;
+                var Istintucs = _context.Tintucs
+                    .AsNoTracking()
+                    .OrderByDescending(x => x.Id);
+                PagedList<Tintuc> models = new PagedList<Tintuc>(Istintucs, pageNumber, pageSize);
+                ViewBag.CurrentPage = pageNumber;
+                return View(models);
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "AdminTaiKhoans");
+            }
+           
         }
 
         // GET: Admin/AdminTintucs/Details/5
@@ -61,9 +73,20 @@ namespace WebLaptop.Areas.Admin.Controllers
         // GET: Admin/AdminTintucs/Create
         public IActionResult Create()
         {
-            ViewData["AccountId"] = new SelectList(_context.TaiKhoans, "Id", "Id");
-            ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId");
-            return View();
+            var taikhoanID = HttpContext.Session.GetString("Id");
+            if (taikhoanID != null)
+            {
+                ViewData["AccountId"] = new SelectList(_context.TaiKhoans, "Id", "Id");
+                ViewData["CatId"] = new SelectList(_context.Categories, "CatId", "CatId");
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "AdminTaiKhoans");
+            }
+
+           
         }
 
         // POST: Admin/AdminTintucs/Create

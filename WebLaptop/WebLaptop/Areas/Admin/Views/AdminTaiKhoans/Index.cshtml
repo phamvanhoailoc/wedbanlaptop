@@ -5,20 +5,19 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Danh sách tài khoản</h2>
 
 <div class="col-xs-12">
     <div class="box-content">
         <div class="row">
             <div class="form-group col-md-6">
-                <select class="form-control" id="idrole" name="idrole" asp-items="ViewBag.QuyenTruyCap">
-                    <option value="0" disabled selected>Chọn quyền truy cập</option>
-                </select>
+                
             </div>
             <div class="form-group col-md-6">
-                <select class="form-control" id="idstatus" name="idstatus" asp-items="ViewBag.IsTrangThai">
-                    <option value="" disabled selected>Chọn trạng thái</option>
-                </select>
+                <div class="dropdown js__drop_down">
+                    <a class="btn btn-info btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminTaiKhoans" asp-action="Create">Add sản phẩm</a>
+                    <!-- /.sub-menu -->
+                </div>
             </div>
         </div>
             <!-- /.sub-menu -->
@@ -57,7 +56,7 @@
                                         <span class="notice notice-danger">Block</span>
                                     }
                                 </td>
-                                <td>
+                                <td width="200px">
                                     <a class="btn btn-info btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminTaiKhoans" asp-action="Details" asp-route-id="@item.Id">View</a>
                                     <a class="btn btn-primary btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminTaiKhoans" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                     <a class="btn btn-success btn-xs waves-effect waves-light" asp-area="Admin" asp-controller="AdminTaiKhoans" asp-action="Delete" asp-route-id="@item.Id">Delete</a>

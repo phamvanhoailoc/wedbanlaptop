@@ -8,7 +8,7 @@
 <h4>Chỉnh sửa quyền truy cập</h4>
 
 <div class="card-content">
-    <form asp-action="Edit" method="post" asp-route-id="@Model.Id" class="form-horizontal">
+    <form asp-action="Edit" method="post" asp-controller="AdminRoles"  asp-route-id="@Model.Id" class="form-horizontal">
         <div class="form-group">
             <label class="col-sm-2 control-label">Role Name</label>
             <div class="col-sm-10">

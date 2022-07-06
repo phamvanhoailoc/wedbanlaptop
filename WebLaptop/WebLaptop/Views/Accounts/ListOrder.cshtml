@@ -1,0 +1,112 @@
+﻿@model WebLaptop.Models.Khachhang
+
+@{
+    ViewData["Title"] = "ListOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<Order> DanhSachDonHang = ViewBag.DonHang;
+}
+
+@if (DanhSachDonHang != null)
+{
+    <main>
+
+        <!-- breadcrumb area start -->
+        <section class="breadcrumb__area box-plr-75">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="breadcrumb__wrapper">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Your Cart</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- breadcrumb area end -->
+        <!-- Cart Area Strat-->
+        <section class="cart-area pb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <form action="#">
+                            <div class="table-content table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="product-thumbnail">Mã đơn hàng</th>
+                                            <th class="cart-product-name">Ngày mua</th>
+
+                                            <th class="product-quantity">Tổng tiền</th>
+                                            <th class="product-subtotal">#</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in DanhSachDonHang)
+                                        {
+                                            <tr>
+                                                <td class="product-thumbnail"><span>@item.Id</span></td>
+                                                <td class="product-name"><span>@item.OrderDate</span></td>
+
+                                                <td class="product-subtotal"><span>@item.TotalMoney.Value.ToString("#,##0") VNĐ</span></td>
+                                                <td class="product-remove"><a class="xemdonhang" data-madonhang="@item.Id" href="#">Xem đơn hàng</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <div id="records_table">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Cart Area End-->
+
+    </main>
+            }
+            else
+            {
+<h2>Bạn chưa đặt đơn hàng nào!!</h2>
+            }
+
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $(".xemdonhang").click(function () {
+                var madonhang = $(this).attr("data-madonhang")
+                $.ajax({
+                    url: '/DonHang/Details',
+                    datatype: 'json',
+                    type: 'POST',
+                    data: { id: madonhang },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+}

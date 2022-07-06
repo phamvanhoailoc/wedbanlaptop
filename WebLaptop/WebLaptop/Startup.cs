@@ -1,4 +1,5 @@
 using AspNetCoreHero.ToastNotification;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,7 +32,13 @@ namespace WebLaptop
             var stringConnectdb = Configuration.GetConnectionString("dbShopLaptop");
             services.AddDbContext<DbShopLaptopContext>(options => options.UseSqlServer(stringConnectdb));
             services.AddSingleton<HtmlEncoder>(HtmlEncoder.Create(allowedRanges: new[] { UnicodeRanges.All }));
-
+            services.AddSession();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(p =>
+                {
+                    p.LoginPath = "/dang-nhap.html";
+                    p.AccessDeniedPath = "/";
+                });
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
         }
@@ -51,9 +58,9 @@ namespace WebLaptop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
            
 

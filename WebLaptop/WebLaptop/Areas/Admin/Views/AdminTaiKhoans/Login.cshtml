@@ -1,0 +1,31 @@
+﻿@model WebLaptop.Areas.Admin.ModelViews.LoginAdminViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="single-wrapper">
+    <form asp-action="Login" class="frm-single">
+        <div class="inside">
+            <div class="title"><strong>Ninja</strong>Admin</div>
+            <!-- /.title -->
+            <div class="frm-title">Login</div>
+            <!-- /.frm-title -->
+            <div class="frm-input"><input asp-for="UserName" type="text" placeholder="Username" class="frm-inp"><i class="fa fa-user frm-ico"></i><span asp-validation-for="UserName"></span></div>
+            <!-- /.frm-input -->
+            <div class="frm-input"><input asp-for="Password" type="password" placeholder="Password" class="frm-inp"><i class="fa fa-lock frm-ico"></i><span asp-validation-for="Password"></span></div>
+            <!-- /.frm-input -->
+            <!-- /.clearfix -->
+            <button type="submit" class="frm-submit">Login<i class="fa fa-arrow-circle-right"></i></button>
+
+            <!-- /.row -->
+
+            <div class="frm-footer">NinjaAdmin © 2016.</div>
+            <!-- /.footer -->
+        </div>
+        <!-- .inside -->
+    </form>
+    <!-- /.frm-single -->
+</div>
+
+
